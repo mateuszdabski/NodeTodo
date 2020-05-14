@@ -14,6 +14,7 @@ var port = 4000;
 // configuration ===============================================================
 
 mongoose.connect("mongodb://ja:dupadupa12@ds119072.mlab.com:19072/lol", {
+  useUnifiedTopology: true,
   useNewUrlParser: true
 }); // connect to mongoDB database on modulus.io
 
