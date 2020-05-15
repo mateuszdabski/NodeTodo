@@ -29,7 +29,16 @@ function mainController($scope, $http) {
   };
 
   // update a todo after checking it
-  $scope.updateTodo = function(id) {};
+  $scope.updateTodo = function(id) {
+    $http
+      .put("/api/todos/update/" +id, this.todo)
+      .success(function(data) {
+        $scope.todos = data;
+      })
+      .error(function(data) {
+        console.log("Error: " + data);
+      });
+  };
 
   // delete a todo after checking it
   $scope.deleteTodo = function(id) {

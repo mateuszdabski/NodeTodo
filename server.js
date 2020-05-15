@@ -99,6 +99,26 @@ app.delete("/api/todos/:todo_id", function(req, res) {
   );
 });
 
+app.put("/api/todos/update/:todo_id", function(req, res){
+
+  Todo.updateOne(
+    {
+      _id: req.params.todo_id
+    },
+    {
+      done: req.body.done
+    },
+      function(err, todo){
+        if (err) res.send(err);
+      
+        Todo.find(function(err, todos){
+          if (err) res.send(err);
+          res.json(todos); 
+        });
+      }
+  );
+});
+
 // application -------------------------------------------------------------
 app.get("*", function(req, res) {
   res.sendFile("./public/index.html", { root: __dirname });
