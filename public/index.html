@@ -32,15 +32,49 @@
 
                         <!-- HEADER AND TODO COUNT -->
                         <div class="jumbotron text-center">
-                                <h1>nodeTODO {{ cos }} <span class="label label-info">{{ todos.length }}</span></h1>
+                                <h1>nodeTODO <span class="label label-info">{{ todos.length }}</span></h1>
                         </div>
 
                         <!-- TODO LIST -->
                         <div id="todo-list" class="row">
                                 <div class="col-sm-4 col-sm-offset-4">
+                                        <h2>All tasks</h2>
 
                                         <!-- LOOP OVER THE TODOS IN $scope.todos -->
                                         <div class="checkbox" ng-repeat="todo in todos">
+                                                <label>
+                                                        <input type="checkbox" ng-click="updateTodo(todo._id)" ng-model="todo.done">
+                                                        {{ todo.text }} <button ng-click="deleteTodo(todo._id)">X</button>      
+                                                </label>
+                                        </div>
+
+                                </div>
+                        </div>
+
+                        <!-- TODO UNFINISHED LIST -->
+                        
+                        <div id="todo-unfinished-list" class="row">
+                                <div class="col-sm-4 col-sm-offset-4">
+                                        <h2>Unfinished tasks</h2>
+
+                                        <!-- LOOP OVER THE TODOS IN $scope.todos -->
+                                        <div class="checkbox" ng-repeat="todo in unfinishedTodos">
+                                                <label>
+                                                        <input type="checkbox" ng-click="updateTodo(todo._id)" ng-model="todo.done">
+                                                        {{ todo.text }} <button ng-click="deleteTodo(todo._id)">X</button>      
+                                                </label>
+                                        </div>
+
+                                </div>
+                        </div>
+
+                        <!-- TODO FINISHED LIST -->
+                        <div id="todo-finished-list" class="row">
+                                <div class="col-sm-4 col-sm-offset-4">
+                                        <h2>Finished tasks</h2>
+
+                                        <!-- LOOP OVER THE TODOS IN $scope.todos -->
+                                        <div class="checkbox" ng-repeat="todo in finishedTodos">
                                                 <label>
                                                         <input type="checkbox" ng-click="updateTodo(todo._id)" ng-model="todo.done">
                                                         {{ todo.text }} <button ng-click="deleteTodo(todo._id)">X</button>      
@@ -64,12 +98,6 @@
                                                 <!-- createToDo() WILL CREATE NEW TODOS -->
                                                 <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
                                         </form>
-                                </div>
-                        </div>
-
-                        <div id="todo-form" class="row">
-                                <div class="col-sm-8 col-sm-offset-2 text-center">
-                                        <input type="text" class="form-control" ng-model="cos">
                                 </div>
                         </div>
                 </div>

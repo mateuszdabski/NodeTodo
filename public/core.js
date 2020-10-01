@@ -3,13 +3,24 @@ var nodeTodo = angular.module("nodeTodo", []);
 function mainController($scope, $http) {
   $scope.formData = {};
 
-  $scope.cos = "Ala ma kota";
-
   // when landing on the page, get all todos and show them
   $http
     .get("/api/todos")
     .success(function(data) {
       $scope.todos = data;
+      var length = data.length;
+      var finished = [];
+      var unfinished = [];
+      for (var i = 0; i<length; i++) {
+        var d = data[i];
+        if (d.done == true) {
+          finished.push(d);
+        } else {
+          unfinished.push(d);
+        }
+      }
+      $scope.finishedTodos = finished;
+      $scope.unfinishedTodos = unfinished;
     })
     .error(function(data) {
       console.log("Error: " + data);
@@ -22,6 +33,19 @@ function mainController($scope, $http) {
       .success(function(data) {
         $("input").val("");
         $scope.todos = data;
+        var length = data.length;
+        var finished = [];
+        var unfinished = [];
+        for (var i = 0; i<length; i++) {
+          var d = data[i];
+          if (d.done == true) {
+            finished.push(d);
+          } else {
+            unfinished.push(d);
+          }
+        }
+        $scope.finishedTodos = finished;
+        $scope.unfinishedTodos = unfinished;
       })
       .error(function(data) {
         console.log("Error: " + data);
@@ -34,6 +58,19 @@ function mainController($scope, $http) {
       .put("/api/todos/update/" +id, this.todo)
       .success(function(data) {
         $scope.todos = data;
+        var length = data.length;
+        var finished = [];
+        var unfinished = [];
+        for (var i = 0; i<length; i++) {
+          var d = data[i];
+          if (d.done == true) {
+            finished.push(d);
+          } else {
+            unfinished.push(d);
+          }
+        }
+        $scope.finishedTodos = finished;
+        $scope.unfinishedTodos = unfinished;
       })
       .error(function(data) {
         console.log("Error: " + data);
@@ -46,6 +83,19 @@ function mainController($scope, $http) {
       .delete("/api/todos/" + id)
       .success(function(data) {
         $scope.todos = data;
+        var length = data.length;
+        var finished = [];
+        var unfinished = [];
+        for (var i = 0; i<length; i++) {
+          var d = data[i];
+          if (d.done == true) {
+            finished.push(d);
+          } else {
+            unfinished.push(d);
+          }
+        }
+        $scope.finishedTodos = finished;
+        $scope.unfinishedTodos = unfinished;
       })
       .error(function(data) {
         console.log("Error: " + data);
